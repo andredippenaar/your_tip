@@ -32,23 +32,41 @@ class YourTip extends StatefulWidget {
 class _YourTipState extends State<YourTip> {
   @override
   Widget build(BuildContext context) {
+    var theme = Theme.of(context);
+    // Add style
+    final style = theme.textTheme.titleMedium!.copyWith(
+      color: theme.colorScheme.onPrimary,
+      fontWeight: FontWeight.bold,
+    );
     return Scaffold(
       appBar: AppBar(
         title: const Text('You Tip'),
       ),
       body: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Container(
-              padding: EdgeInsets.all(8),
-              decoration: BoxDecoration(
-                  color: Colors.deepPurple,
-                  borderRadius: BorderRadius.circular(10)),
-              child: Column(
-                children: [
-                  const Text("Total per Person"),
-                  const Text("R20"),
-                ],
-              )),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Container(
+                padding: const EdgeInsets.all(18),
+                decoration: BoxDecoration(
+                    color: theme.colorScheme.inversePrimary,
+                    borderRadius: BorderRadius.circular(10)),
+                child: Column(
+                  children: [
+                    Text(
+                      "Total per Person",
+                      style: style,
+                    ),
+                    Text(
+                      "R20",
+                      style: style.copyWith(
+                          color: theme.colorScheme.onPrimary,
+                          fontSize: theme.textTheme.displaySmall?.fontSize),
+                    ),
+                  ],
+                )),
+          ),
         ],
       ),
     );
