@@ -33,6 +33,8 @@ class YourTip extends StatefulWidget {
 class _YourTipState extends State<YourTip> {
   int _personCount = 1;
 
+  double _tipPercentage = 0.0;
+
   // Methods
   void increment() {
     setState(() {
@@ -90,7 +92,7 @@ class _YourTipState extends State<YourTip> {
             padding: const EdgeInsets.all(8.0),
             child: Container(
               width: 100,
-              height: 200,
+              height: 300,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(5),
                 border: Border.all(color: theme.colorScheme.primary, width: 2),
@@ -105,7 +107,7 @@ class _YourTipState extends State<YourTip> {
                     keyboardType: TextInputType.number,
                     onChanged: (String value) {},
                   ),
-                  // Split bill area
+                  // === Split bill area ==
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -118,9 +120,40 @@ class _YourTipState extends State<YourTip> {
                         personCount: _personCount,
                         onDecrement: decrement,
                         onIncrement: increment,
-                      )
+                      ),
                     ],
-                  )
+                  ),
+                  // === Tip Section ==
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Tip',
+                        style: theme.textTheme.titleMedium,
+                      ),
+                      Text(
+                        'R20',
+                        style: theme.textTheme.titleMedium,
+                      ),
+                    ],
+                  ),
+
+                  // === Slider Text ==
+                  Text('${(_tipPercentage * 100).round()}%'),
+
+                  // == Tip Slider ==
+                  Slider(
+                    value: _tipPercentage,
+                    onChanged: (value) {
+                      setState(() {
+                        _tipPercentage = value;
+                      });
+                    },
+                    min: 0,
+                    max: 0.5,
+                    divisions: 5,
+                    // label: '${(_tipPercentage * 100).round()}%',
+                  ),
                 ],
               ),
             ),
