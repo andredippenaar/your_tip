@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:your_tip/widgets/bill_amount_field.dart';
 import 'package:your_tip/widgets/person_counter.dart';
+import 'package:your_tip/widgets/tip_row.dart';
 import 'package:your_tip/widgets/tip_slider.dart';
+import 'package:your_tip/widgets/total_per_person.dart';
 
 void main() {
   runApp(const MyApp());
@@ -78,28 +80,7 @@ class _YourTipState extends State<YourTip> {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Container(
-                padding: const EdgeInsets.all(18),
-                decoration: BoxDecoration(
-                    color: theme.colorScheme.inversePrimary,
-                    borderRadius: BorderRadius.circular(10)),
-                child: Column(
-                  children: [
-                    Text(
-                      "Total per Person",
-                      style: style,
-                    ),
-                    Text(
-                      "$total",
-                      style: style.copyWith(
-                          color: theme.colorScheme.onPrimary,
-                          fontSize: theme.textTheme.displaySmall?.fontSize),
-                    ),
-                  ],
-                )),
-          ),
+          TotalPerPerson(theme: theme, style: style, total: total),
           //Form
           Padding(
             padding: const EdgeInsets.all(8.0),
@@ -121,39 +102,16 @@ class _YourTipState extends State<YourTip> {
                     },
                   ),
                   // === Split bill area ==
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'Split',
-                        style: theme.textTheme.titleMedium,
-                      ),
-                      PersonCounter(
-                        theme: theme,
-                        personCount: _personCount,
-                        onDecrement: decrement,
-                        onIncrement: increment,
-                      ),
-                    ],
+                  PersonCounter(
+                    theme: theme,
+                    personCount: _personCount,
+                    onDecrement: decrement,
+                    onIncrement: increment,
                   ),
                   // === Tip Section ==
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'Tip',
-                        style: theme.textTheme.titleMedium,
-                      ),
-                      Text(
-                        'R$totalT',
-                        style: theme.textTheme.titleMedium,
-                      ),
-                    ],
-                  ),
-
+                  TipRow(theme: theme, totalT: totalT),
                   // === Slider Text ==
                   Text('${(_tipPercentage * 100).round()}%'),
-
                   // == Tip Slider ==
                   TipSlider(
                     tipPercentage: _tipPercentage,
