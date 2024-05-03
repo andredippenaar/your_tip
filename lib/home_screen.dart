@@ -19,7 +19,7 @@ class _YourTipState extends State<YourTip> {
   double _billTotal = 0.0;
 
   double totalPerPerson() {
-    return ((_billTotal * _tipPercentage) + (_billTotal) / _personCount);
+    return (((_billTotal * _tipPercentage) + (_billTotal)) / _personCount);
   }
 
   double totalTip() {
